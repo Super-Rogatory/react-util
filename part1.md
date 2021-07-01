@@ -19,7 +19,7 @@ https://addons.mozilla.org/en-US/firefox/addon/react-devtools/
 ## App.js looks like HTML, but it is actually JSX (Javascript Syntax Extension).
 - Notice `<div className="App"></div>` instead of `<div class='app'></app>`
 
-## Don't forget to delete App.css, App.test.js, logo.svg, setupTests.js and Others
+## **Don't forget to delete App.css, App.test.js, logo.svg, setupTests.js and Others**
 
 # JSX Expressions must have a single parent Element
 ## Note, this expression does not necessarily have to be a div. It can be a parent for all we care, but there can only be one parent.
@@ -54,4 +54,36 @@ function App() {
     
   );
 }
+```
+
+# Recall, our user interface is a bunch of components.
+## Convention: Name component files with an uppercase. ie.) Header.js
+
+# App.js
+```
+import Header from './components/Header'
+function App() {
+  return (
+    <div className="container">
+      <Header />
+    </div>
+    
+  );
+}
+
+export default App;
+```
+
+# Header.js
+```
+import React from 'react';
+
+const Header = () => {
+    return (
+        <header>
+            <h1>Tasker</h1>
+        </header>
+    )
+} 
+export default Header;
 ```
