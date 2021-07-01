@@ -87,3 +87,100 @@ const Header = () => {
 } 
 export default Header;
 ```
+
+# Class Components
+```
+import {React, Component} from 'react'
+import Header from './components/Header'
+
+
+class App extends Component{
+  render() {
+    return (
+      <h1>Hello From a Class</h1>
+    )
+  }
+}
+```
+
+# Component Props
+```
+function App() {
+  return (
+    <div className="container">
+      <Header title='Hello'/>
+    </div>
+    
+  );
+}
+```
+## Notice how I can set the title attribute equal to 'Hello'. Well.. is this an attribute in JSX? <br>
+## If I go into Header.js I can access this property by setting my parameter equal to props and doing 'props.title'.
+```
+const Header = (props) => {
+    return (
+        <header>
+            <h1>{props.title}</h1>
+        </header>
+    )
+} 
+export default Header;
+```
+
+# Default Props
+## Suppose I created the title attribute on Header, but I decided not to reference it.
+## I can set a defaultProp value in the Header.js file via.
+```
+App.js
+function App() {
+  return (
+    <div className="container">
+      <Header />
+    </div>
+    
+  );
+}
+Header.js
+Header.defaultProps = {
+  title: 'Tasker'
+}
+```
+## **Destructuring**
+## Notice that props is just an object. We clean up our Header.js file by including only the values we want from the props object.
+```
+const Header = ({ title }) => {
+    return (
+        <header>
+            <h1>{title}</h1>
+        </header>
+    )
+} 
+Header.defaultProps = {
+    title: 'Tasker'
+}
+```
+
+# Property Types
+## When passing in numbers and strings to a component, wrap them in curly braces.
+## App.js
+```
+  return (
+    <div className="container">
+      <Header title={1}/>
+    </div>
+    
+  );
+```
+
+## Header.js
+```
+import React from 'react';
+import PropTypes from 'prop-types';
+.
+.
+.
+Header.propTypes = {
+    title: PropTypes.string, 
+    // if required we can do PropTypes.string.isRequired
+}
+```
