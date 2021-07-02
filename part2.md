@@ -50,3 +50,128 @@ function Button({ color, text }){
 }
 export default Button;
 ```
+# Adding an onClick function. Example.
+
+## Passing in onClick function
+```
+const Header = ({ title }) => {
+    const onClick = () => {
+        console.log(Math.floor(Math.random() * 100));
+    }
+    return (
+        <header className='header'>
+            <h1>{title}</h1>
+            <Button color='green' text='Add' onClick={onClick}/>
+        </header>
+    )
+} 
+```
+## onClick is being passed as a property from our Headers file.
+```
+    function Button({ color, text, onClick }){
+    return (
+        <button style={{backgroundColor: color}}
+        className='btn' onClick={onClick}>
+            {text}
+        </button>
+    );
+}
+```
+# Creating a List in React
+```
+function Tasks() {
+  return (
+    <>
+      {tasks.map((task) => (
+        <h3>{task.text}</h3>
+      ))}
+    </>
+  );
+}
+```
+## We are using our map higher-order function to generate h3 headers for each element of the array.
+## When we use .map and output JSX -> this is a list.
+## Every list needs a key property on the parent of the list.. <h3>
+```
+const tasks = [
+    {
+        id: 1,
+        text: 'I love food',
+    },
+    {
+        id: 2,
+        text: 'I love to eat',
+    },
+    {
+        id: 3,
+        text: 'I live to fight and die another day'
+    },
+]
+
+function Tasks() {
+  return (
+    <>
+      {tasks.map((task) => (
+        <h3 key={task.id}>{task.text}</h3>
+      ))}
+    </>
+  );
+}
+```
+
+# useState Hook (Very Important)
+- ## We don't want tasks array to be seperate from our component, we want it to be part of our state. Instead of having some global variable, let's put the contents of the array in the useState function as an argument.
+- ## Starting by importing useState from react.
+
+## App.js (Global State)
+```
+function App() {
+  const [tasks, setTasks] = useState([
+    {
+        id: 1,
+        text: 'I love food',
+    },
+    {
+        id: 2,
+        text: 'I love to eat',
+    },
+    {
+        id: 3,
+        text: 'I live to fight and die another day'
+    },
+]);
+  return (
+    <div className="container">
+      <Header title='title'/>
+      <Tasks tasks={tasks}/>
+    </div>
+  );
+}
+```
+## Tasks.js
+- We are catching the tasks variable as a property from <Tasks tasks={tasks}>
+```
+function Tasks({tasks}) {
+  return (
+    <>
+      {tasks.map((task) => (
+        <Task key={task.id} task={task}/>
+      ))}
+    </>
+  );
+}
+export default Tasks;
+```
+## Task.js
+- We are catching the task property from Tasks.js's map
+```
+function Task({ task }) {
+    return (
+        <div className='task'>
+            <h3>{task.text}</h3>
+        </div>
+    )
+}
+
+export default Task;
+```
