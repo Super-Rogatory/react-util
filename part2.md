@@ -175,3 +175,24 @@ function Task({ task }) {
 
 export default Task;
 ```
+# React Icons
+## npm install react-icons
+## We added an x icon to delete tasks.
+```
+import { FaTimes } from 'react-icons/fa';
+
+function Task({ task }) {
+    return (
+        <div className='task'>
+            <h3>{task.text} <FaTimes /></h3>
+            <p>{task.day} </p>
+        </div>
+    )
+}
+```
+
+# States get passed down, actions get passed up.
+## Examine Task.js
+- We have an onClick property on our x icon from react-icons. When clicked, we are going to call onDelete, which is a function that was passed in from Tasks.
+- Our Tasks has an onDelete property that comes from App.js.
+- We can then handle onDelete in our global state. NOTE: We start at the app state, then move down to Tasks, then move down to Task before we see the action that fires up back up to the main component.
