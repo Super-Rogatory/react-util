@@ -251,3 +251,5 @@ const newTask = { id, ...task }
 - Else, do nothing.
 - First expression must evaluate to true before doing anything else.
 - Recall Or. `{showAddTask || <AddTask onAdd={addTask}/>}`. This says, if showAddTask is true return showAddTask, else return AddTask component. That is different. <br> **[Or] will pick the FIRST value that is true**. <br> **[And] will pick the second value GIVEN a true expression evaluation from the first expression.**
+
+# Creating a production build, 1:18:00.
