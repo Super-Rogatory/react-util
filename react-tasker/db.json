@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "text": "I love food",
+      "day": "Jul 6th at 12:30pm",
+      "reminder": true
+    },
+    {
+      "id": 2,
+      "text": "I love to eat",
+      "day": "Jul 4th at 11:45am",
+      "reminder": true
+    },
+    {
+      "text": "I live to fight and die another day!",
+      "day": "Sunday",
+      "reminder": true,
+      "id": 3
+    }
+  ]
+}
