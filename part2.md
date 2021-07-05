@@ -122,6 +122,7 @@ function Tasks() {
 # useState Hook (Very Important)
 - ## We don't want tasks array to be seperate from our component, we want it to be part of our state. Instead of having some global variable, let's put the contents of the array in the useState function as an argument.
 - ## Starting by importing useState from react.
+- ## **[tasks,setTasks].** Notice that setTasks is a method from React.
 
 ## App.js (Global State)
 ```
@@ -196,3 +197,57 @@ function Task({ task }) {
 - We have an onClick property on our x icon from react-icons. When clicked, we are going to call onDelete, which is a function that was passed in from Tasks.
 - Our Tasks has an onDelete property that comes from App.js.
 - We can then handle onDelete in our global state. NOTE: We start at the app state, then move down to Tasks, then move down to Task before we see the action that fires up back up to the main component.
+
+# Spread Syntax for Objects
+```
+  // Toggle Reminder
+  const toggleReminder = (id) => {
+    setTasks(tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task))
+  }
+```
+- Toggle's purpose is to reverse true/false values in relation to some event.
+- In our App.js, notice our onToggle property.
+- This function is to call setTasks (which changes the state of the component) with each individual task property in order to reverse some boolean value upon id match.
+- **The second expression after ...task, allows you to change a specific property after it has been 'spread'**
+## Spread syntax example
+```
+let obj1 = { foo: 'bar', x: 42 };
+let obj2 = { foo: 'baz', y: 13 };
+
+let clonedObj = { ...obj1 };
+// Object { foo: "bar", x: 42 }
+
+let mergedObj = { ...obj1, ...obj2 };
+// Object { foo: "baz", x: 42, y: 13 }
+```
+
+# AddTask - important codepiece
+```
+    const [text, setText] = useState('');
+    const [day, setDay] = useState('');
+    const [reminder, setReminder] = useState(false);
+```
+## Default Value && onChange ** Form Input State
+```
+<input type='text' placeholder='Add Task' value={text} onChange={(e) => setText(e.target.value)}/>
+```
+- Notice how we set the value of the JSX expression to {text}. By default, an empty string.
+- Notice our onChange, when you start to type on the input, that fires onChange. Whatever is typed in **WILL CHANGE** our text Value with setText.
+## **Notice how that changes if the input is a text input or a checkbox input**
+# React DevTools will aid in checking functionality - 1:08:00
+# Neat Trick with Spread Syntax and Objects
+```
+const id = Math.floor(Math.random() * 10000) + 1;
+const newTask = { id, ...task }
+```
+## Allows us to create a new object with id:id PLUS all the key-value pairs that exist in the task object.
+## Then we can use `setTasks([...tasks, newTask]);` to add this to our tasks total object.
+
+# Ternary?? You can short-circuit as well!
+```
+{showAddTask && <AddTask onAdd={addTask}/>}
+```
+- If showAddTask is true, then evaluate that component.
+- Else, do nothing.
+- First expression must evaluate to true before doing anything else.
+- Recall Or. `{showAddTask || <AddTask onAdd={addTask}/>}`. This says, if showAddTask is true return showAddTask, else return AddTask component. That is different. <br> **[Or] will pick the FIRST value that is true**. <br> **[And] will pick the second value GIVEN a true expression evaluation from the first expression.**
